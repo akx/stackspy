@@ -15,6 +15,7 @@ class Context(object):
 	def __init__(self, base_url):
 		self.base_url = base_url
 		self.session = requests.Session()
+		self.session.verify = False
 		self._urls = {}
 		self.base = self.get_url(base_url)
 

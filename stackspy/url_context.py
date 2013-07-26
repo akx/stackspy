@@ -1,15 +1,23 @@
 # -- encoding: utf-8 --
 from __future__ import with_statement
 import requests
+from stackspy.result import Result
+import logging
+
 try:
 	from lxml.html import document_fromstring
 except ImportError:
 	document_fromstring = None
-from stackspy.result import Result
-import logging
+
 
 log = logging.getLogger(__name__)
 
+class FailedResponse(object):
+	status_code = -500
+	content = ""
+	headers = {}
+	def __init__(self, url):
+		self.url = url
 
 class UrlContext(object):
 	def __init__(self, context, url):
@@ -41,6 +49,7 @@ class UrlContext(object):
 				self._response = self.context.session.send(self.request.prepare())
 			except:
 				log.exception("Couldn't request URL %r" % self.url)
+				self._response = FailedResponse(self.url)
 
 			if self.url != self._response.url:
 				log.info("%r ended up in a redirect to %r." % (self.url, self._response.url))
@@ -65,7 +74,7 @@ class UrlContext(object):
 
 	@property
 	def is_html(self):
-		return ("html" in self.headers["content-type"]) or ("<html" in self.content.lower())
+		return ("html" in self.headers.get("content-type")) or ("<html" in self.content.lower())
 
 	@property
 	def status_code(self):
