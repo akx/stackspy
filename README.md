@@ -5,6 +5,8 @@ Try to find out the underlying technology behind web sites.
 
 Written originally as a 3-hour Explosion Friday hack project at [Anders Inno](http://www.andersinno.fi).
 
+Inspired by @mitsuhiko's [probe](http://github.com/mitsuhiko/probe) project.
+
 Usage
 -----
 
