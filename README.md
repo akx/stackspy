@@ -8,7 +8,7 @@ Written originally as a 3-hour Explosion Friday hack project at [Anders Inno](ht
 Usage
 -----
 
-1. Make sure you have the requirements (see requirements.txt). Mainly a fresh enough version of [Requests](http://python-requests.org/).
+1. Make sure you have the requirements (see requirements.txt). Mainly a fresh enough version of [Requests](http://python-requests.org/) and [Werkzeug](http://werkzeug.pocoo.org/).
    LXML is not required, but some detections won't work without it.
 
 2. Run the script. For Python 2.7 (which is what you ought to be using anyway), you should be able to just run
