@@ -3,6 +3,7 @@ from __future__ import with_statement
 import requests
 from stackspy.result import Result
 import logging
+from stackspy.utils import create_request
 
 try:
 	from lxml.html import document_fromstring
@@ -38,7 +39,7 @@ class UrlContext(object):
 	@property
 	def request(self):
 		if self._request is None:
-			self._request = requests.Request("GET", self.url)
+			self._request = create_request(self.context.session, "GET", self.url)
 		return self._request
 
 	@property
